@@ -43,6 +43,37 @@ namespace HeavenStudio.Games
     {
         public static CocoaBar instance;
 
+        const int IAAltDownCat = IAMAXCAT;
+        const int IAAltUpCat = IAMAXCAT + 1;
+
+        protected static bool IA_PadAltPress(out double dt)
+        {
+            return PlayerInput.GetPadDown(InputController.ActionsPad.South, out dt);
+        }
+        protected static bool IA_BatonAltPress(out double dt)
+        {
+            return PlayerInput.GetSqueezeDown(out dt);
+        }
+        
+        protected static bool IA_PadAltRelease(out double dt)
+        {
+            return PlayerInput.GetPadUp(InputController.ActionsPad.South, out dt);
+        }
+        protected static bool IA_BatonAltRelease(out double dt)
+        {
+            return PlayerInput.GetSqueezeUp(out dt);
+        }
+
+        public static PlayerInput.InputAction InputAction_AltPress =
+            new("PcoCocoaBarAltPress", new int[] { IAAltDownCat, IAAltDownCat, IAAltDownCat },
+            IA_PadAltPress, IA_TouchBasicPress, IA_BatonAltPress);
+        public static PlayerInput.InputAction InputAction_AltFlickRelease =
+            new("PcoCocoaBarAltRelease", new int[] { IAAltUpCat, IAFlickCat, IAAltUpCat },
+            IA_PadAltRelease, IA_TouchFlick, IA_BatonAltRelease);
+        public static PlayerInput.InputAction InputAction_TouchRelease =
+            new("PcoCocoaBarTouchRelease", new int[] { IAEmptyCat, IAReleaseCat, IAEmptyCat },
+            IA_Empty, IA_TouchBasicRelease, IA_Empty);
+
         void Awake()
         {
             instance = this;
@@ -64,8 +95,8 @@ namespace HeavenStudio.Games
         public void DoCocoa(double beat)
         {
             //Pancake Multisound
-            ScheduleInput(beat, 1.50f, InputAction_BasicPress, FillSuccess, ServeMiss, Nothing);
-            ScheduleInput(beat, 2.50f, InputAction_BasicPress, CupSuccess, ServeMiss, Nothing);            
+            ScheduleInput(beat, 1.50f, InputAction_AltPress, FillSuccess, ServeMiss, Nothing);
+            ScheduleInput(beat, 2.50f, InputAction_AltFlickRelease, CupSuccess, ServeMiss, Nothing);            
 
             MultiSound.Play(new MultiSound.Sound[] {
                 new MultiSound.Sound("cocoaBar/ding_temp", beat),
