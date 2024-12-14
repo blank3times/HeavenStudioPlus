@@ -183,16 +183,6 @@ namespace HeavenStudio
                 Debug.LogWarning("Game loader RvlClapTrapLoader failed!");
             }
 
-            game = PcoCocoaBarLoader.AddGame(eventCaller);
-            if (game != null)
-            {
-                eventCaller.minigames.Add(game.name, game);
-            }
-            else
-            {
-                Debug.LogWarning("Game loader PcoCocoaBarLoader failed!");
-            }
-
             game = NtrCoinLoader.AddGame(eventCaller);
             if (game != null)
             {
