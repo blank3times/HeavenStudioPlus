@@ -41,6 +41,8 @@ namespace HeavenStudio.Games
     /// Minigame inherits directly from MonoBehaviour, and adds Heaven Studio specific methods to override.
     public class CocoaBar : Minigame
     {
+        [SerializeField] CustomerRat Rat_0;
+
         public static CocoaBar instance;
 
         const int IAAltDownCat = IAMAXCAT;
