@@ -31,6 +31,8 @@ namespace HeavenStudio.Games
     /// Minigame inherits directly from MonoBehaviour, and adds Heaven Studio specific methods to override.
     public class CocoaBar : Minigame
     {
+        public static CocoaBar instance;
+                
         void Awake()
         {
             instance = this;
